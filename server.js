@@ -8,12 +8,9 @@ app.use(cors());
 
 // Conexión Atlas
 mongoose
-  .connect("mongodb+srv://admin:JpassD2810*@cluster0.3huu0up.mongodb.net/Datos", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("✅ Conectado a MongoDB Atlas"))
-  .catch((err) => console.error("❌ Error al conectar a MongoDB:", err));
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("Conectado a MongoDB Atlas"))
+  .catch((err) => console.error("Error al conectar a MongoDB:", err));
 
 // Esquema de personajes
 const personajeSchema = new mongoose.Schema({
@@ -66,4 +63,5 @@ app.post("/registros", async (req, res) => {
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
+
 });
